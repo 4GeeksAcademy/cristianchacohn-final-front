@@ -1,13 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
+    const navigate = useNavigate();
+
     return (
         <nav className="navbar navbar-light bg-light">
-            <div className="container">
-                <a className="navbar-brand" href="/">
+            <button
+                    className="btn btn-primary"
+                    onClick={() => navigate("/contact-list")}
+                >
                     Contact List
-                </a>
-            </div>
+            </button>
         </nav>
     );
 };

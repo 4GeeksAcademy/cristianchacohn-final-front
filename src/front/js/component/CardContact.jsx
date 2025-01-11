@@ -12,7 +12,7 @@ const CardContact = ({ contact, onDelete, onEdit }) => {
                 </p>
             </div>
             <div>
-                <button className="btn btn-warning me-2" onClick={() => onEdit(contact)}>
+                <button className="btn btn-warning me-2" onClick={onEdit}>
                     Edit
                 </button>
                 <button className="btn btn-danger" onClick={() => onDelete(contact.id)}>

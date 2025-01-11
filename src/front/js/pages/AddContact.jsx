@@ -2,7 +2,8 @@ import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 
-const AddContact = () => {
+
+export const AddContact = () => {
     const { actions } = useContext(Context);
     const [formData, setFormData] = useState({
         name: "",
@@ -17,11 +18,15 @@ const AddContact = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        actions.addContact(formData);
-        alert("Contact added successfully!");
-        navigate("/");
+        const success = await actions.createContact(formData);
+        if (success) {
+            alert("Contact added successfully!");
+            navigate("/contact-list");
+        } else {
+            alert("Failed to add contact.");
+        }
     };
 
     return (
@@ -70,4 +75,3 @@ const AddContact = () => {
     );
 };
 
-export default AddContact;

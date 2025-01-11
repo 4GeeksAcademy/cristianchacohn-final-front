@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import getState from "./flux.js";
 
-// Crea el contexto global
 export const Context = createContext(null);
 
 const injectContext = (PassedComponent) => {

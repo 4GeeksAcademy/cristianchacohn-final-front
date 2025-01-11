@@ -1,26 +1,32 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import CardContact from "../component/CardContact.jsx";
+import { useNavigate } from "react-router-dom";
 
-const ContactList = () => {
+
+export const ContactList = () => {
     const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
+    console.log(store);
 
     return (
         <div className="container mt-5">
             <h1 className="text-center mb-4">Contacts</h1>
             <div className="text-end mb-3">
-                <a href="/addContact" className="btn btn-primary">
+                <button
+                    className="btn btn-primary"
+                    onClick={() => navigate("/add-contact")}>
                     Add New Contact
-                </a>
+                </button>
             </div>
             <ul className="list-group">
-                {store.listContacts && store.listContacts.length > 0 ? (
-                    store.listContacts.map((contact) => (
+                {store.contacts && store.contacts.length > 0 ? (
+                    store.contacts.map((contact) => (
                         <CardContact
                             key={contact.id}
                             contact={contact}
                             onDelete={actions.deleteContact}
-                            onEdit={(contact) => actions.editContact(contact)}
+                            onEdit={() => navigate(`/edit-contact`)}
                         />
                     ))
                 ) : (
@@ -31,4 +37,3 @@ const ContactList = () => {
     );
 };
 
-export default ContactList;

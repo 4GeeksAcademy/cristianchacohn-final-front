@@ -1,20 +1,19 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import injectContext from "./store/appContext";
-// Custom components
+// Customs Components 
 import ScrollToTop from "./component/ScrollToTop.jsx";
-import { BackendURL } from "./component/BackendURL.jsx";
 import { Navbar } from "./component/Navbar.jsx";
 import { Footer } from "./component/Footer.jsx";
-// Pages
-import ContactList from "./pages/ContactList.jsx";
-import AddContact from "./pages/AddContact.jsx";
+// Custom Pages
+import { ContactList } from "./pages/ContactList.jsx";
+import { AddContact } from "./pages/AddContact.jsx";
+import { Home } from "./pages/Home.jsx";
+import { EditContact } from "./pages/EditContact.jsx";
 
-// Create your first component
+
 const Layout = () => {
     const basename = process.env.BASENAME || "";
-
-    if (!process.env.BACKEND_URL || process.env.BACKEND_URL === "") return <BackendURL />;
 
     return (
         <div>
@@ -22,10 +21,11 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
-                        <Route element={<ContactList />} path="/" />
-                        <Route element={<AddContact />} path="/addContact" />
-                        <Route element={<AddContact />} path="/editContact/:id" />
-                        <Route element={<h1>Not found!</h1>} path="*" />
+                        <Route element={<Home />} path="/" />
+                        <Route element={<ContactList />} path="/contact-list" />
+                        <Route element={<AddContact />} path="/add-contact" />
+                        <Route element={<h1>Not Found</h1>} path="*" />
+                        <Route element={<EditContact />} path="/edit-contact" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
