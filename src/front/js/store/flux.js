@@ -51,18 +51,18 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const response = await fetch(`${apiBaseURL}agendas/${agendaSlug}/contacts/${id}`, {
                         method: "PUT",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ ...updatedContact, agenda_slug: agendaSlug }),
+                        body: JSON.stringify(updatedContact), // Sin agenda_slug
                     });
                     if (!response.ok) throw new Error(`Error updating contact: ${response.statusText}`);
-                    
-                    // Actualizar los contactos después de la edición
-                    await getActions().fetchContacts(); 
-                    return true; 
+                    await getActions().loadContacts();
+                    return true;
                 } catch (error) {
                     console.error("Error updating contact:", error);
-                    return false; 
+                    return false;
                 }
-            },            
+            },
+            
+            
         },
     };
 };

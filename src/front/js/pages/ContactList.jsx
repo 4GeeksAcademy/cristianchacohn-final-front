@@ -26,8 +26,9 @@ export const ContactList = () => {
                             key={contact.id}
                             contact={contact}
                             onDelete={actions.deleteContact}
-                            onEdit={() => navigate(`/edit-contact`)}
+                            onEdit={() => navigate(`/edit-contact/${contact.id}`)} // Ruta con el ID
                         />
+
                     ))
                 ) : (
                     <li className="list-group-item">No contacts available.</li>

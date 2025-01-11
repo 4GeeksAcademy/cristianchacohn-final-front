@@ -7,34 +7,30 @@ export const EditContact = () => {
     const { id } = useParams(); // Obtiene el ID del contacto desde la URL
     const navigate = useNavigate();
 
-    // Estado para el contacto a editar
     const [updatedContact, setUpdatedContact] = useState(null);
 
-    // Carga el contacto al montar el componente
     useEffect(() => {
         const contact = store.contacts.find((contact) => contact.id === parseInt(id));
         if (contact) {
-            setUpdatedContact(contact); 
+            setUpdatedContact(contact);
         } else {
-            navigate("/contacts"); 
+            navigate("/contacts");
         }
-    }, [id, store.listContacts, navigate]);
+    }, [id, store.contacts, navigate]);
 
-    // Manejar cambios en los campos
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUpdatedContact({ ...updatedContact, [name]: value });
     };
 
-    // Enviar formulario
     const handleSubmit = async (e) => {
         e.preventDefault();
         const success = await actions.updateContact(id, updatedContact);
-        if (success) navigate("/contacts");
+        if (success) navigate("/contact-list");
         else alert("Failed to update contact.");
     };
 
-    if (!updatedContact) return <p>Loading...</p>; // Muestra un mensaje mientras se carga el contacto
+    if (!updatedContact) return <p>Loading...</p>;
 
     return (
         <div className="container mt-5">
@@ -76,9 +72,10 @@ export const EditContact = () => {
                         required
                     />
                 </div>
-                <button type="submit" className="btn btn-primary w-100">Save Changes</button>
+                <button type="submit" className="btn btn-primary w-100">
+                    Save Changes
+                </button>
             </form>
         </div>
     );
 };
-
